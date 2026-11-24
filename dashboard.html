@@ -85,101 +85,51 @@ function konfirmasiHapus(){if(!hapusTarget)return;var id=hapusTarget;delete DATA
 function batalHapus(){hapusTarget=null;document.getElementById('popupHapus').classList.remove('show');}
 function tambahEventBaru(){var nama=document.getElementById('evNama').value.trim(),tanggal=document.getElementById('evTanggal').value,tempat=document.getElementById('evTempat').value.trim();if(!nama||!tanggal||!tempat)return showErrorPopup('Isi Nama, Tanggal & Lokasi dulu!');var id='ev'+Date.now(),emojiMap={Olahraga:'🏆','Seni & Kreativitas':'🎨',Akademik:'🧠',Desain:'🎨',Musik:'🎤',Lainnya:'🏆'},kat=document.getElementById('evKategori').value,ev={id:id,nama:nama,namaLengkap:nama,kode:'EV',kat:kat,tanggal:hariDari(tanggal),tempat:tempat,total:parseInt(document.getElementById('evKuota').value)||30,emoji:emojiMap[kat]||'🏆',jamMulai:document.getElementById('evJamMulai').value||'09:00',jamSelesai:document.getElementById('evJamSelesai').value||'12:00',sistem:'Sistem Gugur',tipeEvent:document.getElementById('evTipe').value,baru:true};DATA_LOMBA[id]=ev;var baru=getEventBaru();baru.push(ev);localStorage.setItem('event_baru',JSON.stringify(baru));var nots=getNot()||[];nots.unshift({id:Date.now(),judul:'📢 Event Baru! '+nama,isi:nama+' • '+ev.tanggal+' • '+tempat,waktu:'Baru saja • Developer',icon:'🆕',bg:'#FEE2E2',target:'event',dibaca:false});setNot(nots);document.getElementById('evNama').value='';document.getElementById('evTempat').value='';renderDev();renderEvent();renderNot();document.getElementById('popupEventNama').innerText=nama;document.getElementById('popupEventEmoji').innerText=ev.emoji;document.getElementById('popupEventDetail').innerHTML='📅 '+ev.tanggal+'<br>📍 '+tempat+'<br>👥 '+ev.tipeEvent+' • Kuota: '+ev.total;document.getElementById('popupSuksesEvent').classList.add('show');}
 initNot();loadRating();renderBerita();renderEvent();renderJadwalBeranda();renderNot();loadFoto();loadProfil();updateSemuaVersi();
-<!-- ===== STATISTIK KHUSUS DEVELOPER ONLY - TEMPEL DI DALAM page-developer ===== -->
-<div id="elombaStatDevOnly" style="display:none;max-width:520px;margin:0 auto 14px;font-family:'Plus Jakarta Sans',sans-serif">
-  <div style="background:#fff;border-radius:18px;padding:16px;box-shadow:0 4px 18px rgba(15,23,42,.06);border:1px solid #FDE047">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <b style="font-size:16px;color:#0F172A">📊 Statistik Developer 🔒</b>
-        <div style="font-size:11px;color:#64748B;margin-top:2px">Hanya Developer yang bisa liat • Real-time</div>
-      </div>
-      <span style="background:#DCFCE7;color:#166534;font-size:10px;font-weight:800;padding:5px 9px;border-radius:99px">● LIVE</span>
+<!-- STATISTIK DEV - VERSI FIX - TEMPEL 1X DI DALAM page-developer -->
+<div id="statDevFix" style="display:none">
+  <div style="background:#fff;border-radius:18px;padding:16px;border:2px solid #FDE047;margin-bottom:12px">
+    <b style="font-size:15px">📊 Statistik Developer 🔒</b>
+    <p style="font-size:11px;color:#64748B">Hanya Developer • Auto update</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:12px;text-align:center">
+      <div style="background:#F5F3FF;border-radius:12px;padding:10px 4px"><b id="fixStatEvent">0</b><br><span style="font-size:10px">Event</span></div>
+      <div style="background:#DCFCE7;border-radius:12px;padding:10px 4px"><b id="fixStatDaftar">0</b><br><span style="font-size:10px">Pendaftar</span></div>
+      <div style="background:#FEF3C7;border-radius:12px;padding:10px 4px"><b id="fixStatUndi">0</b><br><span style="font-size:10px">Sudah Undi</span></div>
+      <div style="background:#DBEAFE;border-radius:12px;padding:10px 4px"><b id="fixStatJadwal">0</b><br><span style="font-size:10px">Jadwal</span></div>
     </div>
-
-    <!-- 4 KOTAK -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:14px;text-align:center">
-      <div style="background:#F5F3FF;border-radius:12px;padding:10px 4px"><b id="devStatEvent" style="font-size:18px;color:#4C1D95">0</b><br><span style="font-size:10px;color:#64748B">Total Event</span></div>
-      <div style="background:#DCFCE7;border-radius:12px;padding:10px 4px"><b id="devStatDaftar" style="font-size:18px;color:#166534">0</b><br><span style="font-size:10px;color:#64748B">Total Pendaftar</span></div>
-      <div style="background:#FEF3C7;border-radius:12px;padding:10px 4px"><b id="devStatUndi" style="font-size:18px;color:#92400E">0</b><br><span style="font-size:10px;color:#64748B">Sudah Undi</span></div>
-      <div style="background:#DBEAFE;border-radius:12px;padding:10px 4px"><b id="devStatJadwal" style="font-size:18px;color:#1E40AF">0</b><br><span style="font-size:10px;color:#64748B">Jadwal</span></div>
-    </div>
-
-    <!-- DIAGRAM BATANG PER LOMBA -->
-    <b style="font-size:13px;display:block;margin:16px 0 10px">📈 Pendaftar Per Lomba</b>
-    <div id="devStatBars"></div>
-
-    <!-- DONUT -->
-    <div style="display:flex;gap:10px;align-items:center;margin-top:14px;background:#F8F7FC;border-radius:12px;padding:12px">
-      <div id="devStatDonut" style="width:64px;height:64px;border-radius:50%;background:#E2E8F0;flex-shrink:0;display:grid;place-items:center;font-weight:800;font-size:12px">0%</div>
-      <div style="font-size:12px;line-height:1.6;color:#334155">
-        <b id="devStatDonutText">Belum ada data</b><br>
-        <span id="devStatDonutSub" style="color:#64748B">Belum ada yang daftar</span>
-      </div>
-    </div>
-    <p id="devStatInfo" style="font-size:11px;color:#94A3B8;text-align:center;margin-top:12px">-</p>
+    <div id="fixStatBars" style="margin-top:14px"></div>
+    <button onclick="fixStatRefresh()" style="width:100%;margin-top:10px;padding:11px;background:#4C1D95;color:#fff;border:0;border-radius:12px;font-weight:800;cursor:pointer">🔄 Refresh Statistik</button>
   </div>
 </div>
-
 <script>
-(function(){
-  function devGet(k,d){ try{ return JSON.parse(localStorage.getItem(k)||JSON.stringify(d)); }catch(e){ return d; } }
-  window.devStatRefresh = function(){
-    var box = document.getElementById('elombaStatDevOnly');
-    if(!box) return;
-    // KUNCI UTAMA: cuma muncul kalo lagi di halaman developer & udah login developer
-    var lagiDiDev = document.getElementById('page-developer') && document.getElementById('page-developer').classList.contains('active');
-    // Di code lu, variabelnya namanya devLogin. Kalo gak ketemu, anggap aja lagi di dev = tampil
-    var isDev = (typeof devLogin !== 'undefined') ? devLogin : true;
-    if(!lagiDiDev || !isDev){ box.style.display = 'none'; return; }
-    box.style.display = 'block';
-
-    var daftar = devGet('daftar_lomba', []); if(!Array.isArray(daftar)) daftar = [];
-    var totalEvent = 5 + devGet('event_baru', []).length - devGet('event_dihapus', []).length;
-    var sudahUndi = 0; daftar.forEach(function(id){ if(localStorage.getItem('undian_'+id)) sudahUndi++; });
-    var jadwal = devGet('jadwal_main', []).length;
-    var berita = devGet('berita_list', []).length;
-
-    document.getElementById('devStatEvent').innerText = totalEvent;
-    document.getElementById('devStatDaftar').innerText = daftar.length;
-    document.getElementById('devStatUndi').innerText = sudahUndi;
-    document.getElementById('devStatJadwal').innerText = jadwal;
-
-    // Diagram per lomba - ambil dari data asli lu
-    var bars = document.getElementById('devStatBars');
-    var maxNilai = 1; daftar.length > maxNilai ? maxNilai = daftar.length : 0;
-    var list = [
-      { label: 'Total Pendaftar', nilai: daftar.length, warna: '#059669' },
-      { label: 'Sudah Cabut Undi', nilai: sudahUndi, warna: '#F59E0B' },
-      { label: 'Belum Undi', nilai: daftar.length - sudahUndi, warna: '#94A3B8' },
-      { label: 'Jadwal Direkap', nilai: jadwal, warna: '#2563EB' },
-      { label: 'Berita Terbit', nilai: berita, warna: '#DB2777' },
-    ];
-    var h = '';
-    list.forEach(function(d){
-      var p = Math.round((d.nilai / Math.max(1, Math.max.apply(null, list.map(function(x){return x.nilai})))) * 100);
-      h += '<div style="margin-bottom:9px"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span>'+d.label+'</span><span>'+d.nilai+'</span></div><div style="height:10px;background:#E2E8F0;border-radius:99px;overflow:hidden;margin-top:4px"><div style="height:100%;width:'+p+'%;background:'+d.warna+';border-radius:99px"></div></div></div>';
-    });
-    bars.innerHTML = h;
-
-    var persen = totalEvent === 0 ? 0 : Math.min(100, Math.round((sudahUndi / Math.max(1, daftar.length)) * 100));
-    if(daftar.length === 0) persen = 0;
-    var donut = document.getElementById('devStatDonut');
-    donut.style.background = 'conic-gradient(#4C1D95 0 '+persen+'%, #E2E8F0 '+persen+'% 100%)';
-    donut.innerHTML = '<span style="background:#fff;width:44px;height:44px;border-radius:50%;display:grid;place-items:center">'+persen+'%</span>';
-    document.getElementById('devStatDonutText').innerText = persen >= 80 ? '🔥 Semua Sudah Undi!' : persen >= 40 ? '👍 Separuh Sudah Undi' : '💤 Banyak Yang Belum Undi';
-    document.getElementById('devStatDonutSub').innerText = sudahUndi + ' dari ' + daftar.length + ' pendaftar sudah cabut undi • ' + jadwal + ' jadwal direkap';
-    document.getElementById('devStatInfo').innerText = 'Terakhir diperbarui: ' + new Date().toLocaleTimeString('id-ID');
-  };
-  // Cek tiap kali pindah halaman + tiap 3 detik
-  setInterval(function(){ window.devStatRefresh(); }, 3000);
-  setTimeout(function(){ window.devStatRefresh(); }, 500);
-  // Kalo di code lu ada fungsi go(), kita tempelin biar tiap pindah halaman langsung refresh
-  var goAsli = window.go;
-  if(goAsli && !window.goSudahDitempelStat){
-    window.goSudahDitempelStat = true;
-    window.go = function(p){ goAsli(p); setTimeout(function(){ window.devStatRefresh(); }, 100); };
-  }
-})();
+function fixStatRefresh(){
+  var box = document.getElementById('statDevFix');
+  if(!box) return;
+  // Cuma tampil kalo di halaman developer
+  var pageDev = document.getElementById('page-developer');
+  var aktif = pageDev && pageDev.classList.contains('active');
+  if(!aktif){ box.style.display='none'; return; }
+  box.style.display='block';
+  try{
+    var daftar = JSON.parse(localStorage.getItem('daftar_lomba')||'[]');
+    var eventBaru = JSON.parse(localStorage.getItem('event_baru')||'[]');
+    var jadwal = JSON.parse(localStorage.getItem('jadwal_main')||'[]');
+    var sudahUndi = 0;
+    daftar.forEach(function(id){ if(localStorage.getItem('undian_'+id)) sudahUndi++; });
+    document.getElementById('fixStatEvent').innerText = 5 + eventBaru.length;
+    document.getElementById('fixStatDaftar').innerText = daftar.length;
+    document.getElementById('fixStatUndi').innerText = sudahUndi;
+    document.getElementById('fixStatJadwal').innerText = jadwal.length;
+    var max = Math.max(1, daftar.length, sudahUndi, jadwal.length);
+    function bar(label,nilai,warna){
+      var p = Math.round(nilai/max*100);
+      return '<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span>'+label+'</span><span>'+nilai+'</span></div><div style="height:10px;background:#E2E8F0;border-radius:99px;margin-top:4px;overflow:hidden"><div style="height:100%;width:'+p+'%;background:'+warna+'"></div></div></div>';
+    }
+    document.getElementById('fixStatBars').innerHTML = bar('Pendaftar',daftar.length,'#059669') + bar('Sudah Undi',sudahUndi,'#F59E0B') + bar('Jadwal',jadwal.length,'#2563EB');
+  }catch(e){ console.log('stat error', e); }
+}
+// Jangan nimpa go(), cuma ngintip kalo halaman ganti
+document.addEventListener('click', function(){ setTimeout(fixStatRefresh, 200); });
+setTimeout(fixStatRefresh, 500);
 </script>
-<!-- ===== SELESAI STATISTIK DEVELOPER ===== -->
+<!-- SELESAI STATISTIK DEV FIX --> 
 </script></body></html>
