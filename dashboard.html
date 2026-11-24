@@ -84,52 +84,5 @@ var hapusTarget=null;function mintaHapusEvent(id){hapusTarget=id;var L=DATA_LOMB
 function konfirmasiHapus(){if(!hapusTarget)return;var id=hapusTarget;delete DATA_LOMBA[id];var del=getDeleted();if(del.indexOf(id)<0)del.push(id);localStorage.setItem('event_dihapus',JSON.stringify(del));var baru=getEventBaru().filter(function(e){return e.id!==id});localStorage.setItem('event_baru',JSON.stringify(baru));setDaftar(getDaftar().filter(function(x){return x!==id}));document.getElementById('popupHapus').classList.remove('show');hapusTarget=null;renderDev();renderEvent();showSuksesPopup('Event Dihapus','Event berhasil dihapus.','🗑️');}
 function batalHapus(){hapusTarget=null;document.getElementById('popupHapus').classList.remove('show');}
 function tambahEventBaru(){var nama=document.getElementById('evNama').value.trim(),tanggal=document.getElementById('evTanggal').value,tempat=document.getElementById('evTempat').value.trim();if(!nama||!tanggal||!tempat)return showErrorPopup('Isi Nama, Tanggal & Lokasi dulu!');var id='ev'+Date.now(),emojiMap={Olahraga:'🏆','Seni & Kreativitas':'🎨',Akademik:'🧠',Desain:'🎨',Musik:'🎤',Lainnya:'🏆'},kat=document.getElementById('evKategori').value,ev={id:id,nama:nama,namaLengkap:nama,kode:'EV',kat:kat,tanggal:hariDari(tanggal),tempat:tempat,total:parseInt(document.getElementById('evKuota').value)||30,emoji:emojiMap[kat]||'🏆',jamMulai:document.getElementById('evJamMulai').value||'09:00',jamSelesai:document.getElementById('evJamSelesai').value||'12:00',sistem:'Sistem Gugur',tipeEvent:document.getElementById('evTipe').value,baru:true};DATA_LOMBA[id]=ev;var baru=getEventBaru();baru.push(ev);localStorage.setItem('event_baru',JSON.stringify(baru));var nots=getNot()||[];nots.unshift({id:Date.now(),judul:'📢 Event Baru! '+nama,isi:nama+' • '+ev.tanggal+' • '+tempat,waktu:'Baru saja • Developer',icon:'🆕',bg:'#FEE2E2',target:'event',dibaca:false});setNot(nots);document.getElementById('evNama').value='';document.getElementById('evTempat').value='';renderDev();renderEvent();renderNot();document.getElementById('popupEventNama').innerText=nama;document.getElementById('popupEventEmoji').innerText=ev.emoji;document.getElementById('popupEventDetail').innerHTML='📅 '+ev.tanggal+'<br>📍 '+tempat+'<br>👥 '+ev.tipeEvent+' • Kuota: '+ev.total;document.getElementById('popupSuksesEvent').classList.add('show');}
-initNot();loadRating();renderBerita();renderEvent();renderJadwalBeranda();renderNot();loadFoto();loadProfil();updateSemuaVersi();
-<!-- STATISTIK DEV - VERSI FIX - TEMPEL 1X DI DALAM page-developer -->
-<div id="statDevFix" style="display:none">
-  <div style="background:#fff;border-radius:18px;padding:16px;border:2px solid #FDE047;margin-bottom:12px">
-    <b style="font-size:15px">📊 Statistik Developer 🔒</b>
-    <p style="font-size:11px;color:#64748B">Hanya Developer • Auto update</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:12px;text-align:center">
-      <div style="background:#F5F3FF;border-radius:12px;padding:10px 4px"><b id="fixStatEvent">0</b><br><span style="font-size:10px">Event</span></div>
-      <div style="background:#DCFCE7;border-radius:12px;padding:10px 4px"><b id="fixStatDaftar">0</b><br><span style="font-size:10px">Pendaftar</span></div>
-      <div style="background:#FEF3C7;border-radius:12px;padding:10px 4px"><b id="fixStatUndi">0</b><br><span style="font-size:10px">Sudah Undi</span></div>
-      <div style="background:#DBEAFE;border-radius:12px;padding:10px 4px"><b id="fixStatJadwal">0</b><br><span style="font-size:10px">Jadwal</span></div>
-    </div>
-    <div id="fixStatBars" style="margin-top:14px"></div>
-    <button onclick="fixStatRefresh()" style="width:100%;margin-top:10px;padding:11px;background:#4C1D95;color:#fff;border:0;border-radius:12px;font-weight:800;cursor:pointer">🔄 Refresh Statistik</button>
-  </div>
-</div>
-<script>
-function fixStatRefresh(){
-  var box = document.getElementById('statDevFix');
-  if(!box) return;
-  // Cuma tampil kalo di halaman developer
-  var pageDev = document.getElementById('page-developer');
-  var aktif = pageDev && pageDev.classList.contains('active');
-  if(!aktif){ box.style.display='none'; return; }
-  box.style.display='block';
-  try{
-    var daftar = JSON.parse(localStorage.getItem('daftar_lomba')||'[]');
-    var eventBaru = JSON.parse(localStorage.getItem('event_baru')||'[]');
-    var jadwal = JSON.parse(localStorage.getItem('jadwal_main')||'[]');
-    var sudahUndi = 0;
-    daftar.forEach(function(id){ if(localStorage.getItem('undian_'+id)) sudahUndi++; });
-    document.getElementById('fixStatEvent').innerText = 5 + eventBaru.length;
-    document.getElementById('fixStatDaftar').innerText = daftar.length;
-    document.getElementById('fixStatUndi').innerText = sudahUndi;
-    document.getElementById('fixStatJadwal').innerText = jadwal.length;
-    var max = Math.max(1, daftar.length, sudahUndi, jadwal.length);
-    function bar(label,nilai,warna){
-      var p = Math.round(nilai/max*100);
-      return '<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700"><span>'+label+'</span><span>'+nilai+'</span></div><div style="height:10px;background:#E2E8F0;border-radius:99px;margin-top:4px;overflow:hidden"><div style="height:100%;width:'+p+'%;background:'+warna+'"></div></div></div>';
-    }
-    document.getElementById('fixStatBars').innerHTML = bar('Pendaftar',daftar.length,'#059669') + bar('Sudah Undi',sudahUndi,'#F59E0B') + bar('Jadwal',jadwal.length,'#2563EB');
-  }catch(e){ console.log('stat error', e); }
-}
-// Jangan nimpa go(), cuma ngintip kalo halaman ganti
-document.addEventListener('click', function(){ setTimeout(fixStatRefresh, 200); });
-setTimeout(fixStatRefresh, 500);
-</script>
-<!-- SELESAI STATISTIK DEV FIX --> 
+initNot();loadRating();renderBerita();renderEvent();renderJadwalBeranda();renderNot();loadFoto();loadProfil();updateSemuaVersi(); 
 </script></body></html>
