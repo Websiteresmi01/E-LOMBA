@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>E-LOMBA - Daftar / Masuk</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("ucZmqg6bLuGw-Vz2w");</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
+html,body{overflow-x:hidden !important;max-width:100vw !important}
+body{background:#f1f2f8;min-height:100vh;width:100%;transition:background .3s}
+header{background:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,.06);position:sticky;top:0;z-index:10;width:100%;max-width:100vw;gap:10px;flex-wrap:wrap;transition:background .3s}
+.logo{font-size:20px;font-weight:800;color:#5b21b6;white-space:nowrap;flex-shrink:0}
+.logo span{color:#f97316}
+nav{display:flex;gap:14px;font-size:13px;font-weight:600;color:#475569;overflow-x:auto;white-space:nowrap;flex:1;scrollbar-width:none;-ms-overflow-style:none;align-items:center}
+nav::-webkit-scrollbar{display:none}
+nav a{cursor:pointer;flex-shrink:0}
+.btn-cs{display:flex;align-items:center;gap:7px;background:#dcfce7;border:1.5px solid #86efac;padding:8px 13px;border-radius:999px;font-weight:800;color:#166534;font-size:13px;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.cs-icon-btn{width:26px;height:26px;background:#22c55e;border-radius:50%;display:grid;place-items:center;font-size:13px}
+.header-ver{font-size:12px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.container{max-width:1080px;margin:20px auto;padding:0 14px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:20px;align-items:start;width:100%}
+.left{background:linear-gradient(135deg,#4c1d95,#7c3aed 50%,#f97316);border-radius:24px;padding:28px;color:white;min-height:620px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative;width:100%;min-width:0}
+.left h1{font-size:42px;line-height:1.05;word-wrap:break-word}
+.left h1 b{color:#fde68a}
+.left p{margin-top:14px;color:#e9d5ff;line-height:1.6;font-size:15px}
+.badge{display:inline-block;background:rgba(255,255,255,.2);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:16px}
+.stats{display:flex;gap:10px;margin-top:26px;width:100%}
+.stat{background:rgba(255,255,255,.16);padding:14px;border-radius:16px;flex:1;min-width:0}
+.stat b{font-size:20px;display:block}
+.stat span{font-size:11px;opacity:.9}
+.right{background:#fff;border-radius:24px;padding:26px;box-shadow:0 12px 30px rgba(0,0,0,.07);width:100%;min-width:0;overflow:hidden;transition:background .3s}
+.tabs{display:flex;background:#f1f5f9;padding:5px;border-radius:999px;margin-bottom:22px}
+.tabs button{flex:1;padding:11px;border:0;border-radius:999px;font-weight:700;cursor:pointer;background:transparent;color:#64748b;white-space:nowrap;font-size:13px}
+.tabs button.active{background:#5b21b6;color:#fff;box-shadow:0 6px 14px rgba(91,33,182,.3)}
+h2{font-size:24px;word-wrap:break-word}
+.sub{font-size:13.5px;color:#64748b;margin:6px 0 18px}
+label{font-size:13px;font-weight:700;display:block;margin-top:14px;color:#334155}
+input,select{width:100%;padding:12px 13px;border:1.5px solid #e2e8f0;border-radius:12px;margin-top:6px;font-size:14px;outline:none;background:#f8fafc;max-width:100%}
+input:focus,select:focus{border-color:#7c3aed;background:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row-code{display:flex;gap:10px}
+.row-code input{flex:1;min-width:0}
+.btn-code{background:#f97316;color:#fff;border:0;padding:12px 12px;border-radius:12px;font-weight:800;cursor:pointer;white-space:nowrap;margin-top:6px;flex-shrink:0;font-size:13px}
+.btn-code:disabled{background:#cbd5e1;cursor:not-allowed}
+.captcha{margin-top:14px;background:#fff7ed;border:1.5px dashed #fdba74;padding:12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.captcha b{font-size:20px;letter-spacing:4px;color:#1e293b}
+.captcha button{border:0;background:#fff;padding:8px 10px;border-radius:10px;cursor:pointer;font-size:16px;flex-shrink:0}
+.check{display:flex;gap:9px;align-items:flex-start;font-size:13px;margin-top:16px;line-height:1.5;color:#475569}
+.check input{width:18px;height:18px;margin:0;accent-color:#5b21b6;flex-shrink:0}
+.check a{color:#5b21b6;font-weight:700;cursor:pointer;text-decoration:underline}
+.btn-main{width:100%;padding:14px;border:0;border-radius:13px;background:#5b21b6;color:#fff;font-weight:800;font-size:15px;margin-top:18px;cursor:pointer}
+.btn-main:hover{background:#4c1d95}
+.small{font-size:12px;color:#94a3b8;text-align:center;margin-top:12px}
+.success{background:#dcfce7;border:1px solid #86efac;padding:12px;border-radius:12px;font-size:13px;color:#166534;display:none;margin-top:14px;line-height:1.5}
+.error{background:#fef2f2;border:1px solid #fecaca;padding:12px;border-radius:12px;font-size:13px;color:#991b1b;display:none;margin-top:14px;line-height:1.5}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}
+.modal.show{display:flex}
+.modal-card{background:#fff;border-radius:20px;padding:28px;max-width:380px;width:100%;text-align:center}
+.modal-card .icon{width:72px;height:72px;background:#dcfce7;border-radius:50%;display:grid;place-items:center;font-size:34px;margin:0 auto 14px}
+.modal-card h3{font-size:22px}
+.modal-card p{color:#64748b;font-size:14px;margin:8px 0 18px}
+.modal-card button{background:#2563eb;color:#fff;border:0;padding:13px;width:100%;border-radius:12px;font-weight:800;cursor:pointer}
+.dashboard{display:none;text-align:center;padding:20px 0}
+.dashboard h2{font-size:26px}
+.dashboard p{color:#64748b;margin:8px 0 20px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left}
+.dcard{background:#f8fafc;padding:16px;border-radius:16px;border:1px solid #e2e8f0;min-width:0}
+.dcard b{display:block;margin-bottom:4px}
+.dcard span{font-size:12px;color:#64748b}
+.cs-card{background:#fff;border-radius:22px;padding:0;max-width:360px;width:100%;overflow:hidden;text-align:left}
+.cs-head{background:#5b21b6;padding:18px;color:#fff;display:flex;gap:12px;align-items:center}
+.cs-avatar{width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;display:grid;place-items:center;font-size:24px;flex-shrink:0;border:2px solid rgba(255,255,255,.5)}
+.cs-head b{display:block}
+.cs-head span{font-size:12px;opacity:.9}
+.cs-body{padding:16px}
+.cs-opt{display:flex;gap:12px;align-items:center;padding:13px;border:1.5px solid #e2e8f0;border-radius:14px;margin-bottom:10px;cursor:pointer;text-decoration:none;color:#0f172a}
+.cs-opt b{display:block;font-size:14px}
+.cs-opt span{font-size:12px;color:#64748b}
+.toast{position:fixed;top:16px;left:50%;transform:translate(-50%,-140%);background:#111827;color:#fff;padding:13px 16px;border-radius:14px;font-size:13.5px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.35);z-index:999;max-width:calc(100vw - 32px);width:max-content;display:flex;gap:10px;align-items:center;transition:transform .35s ease, opacity .35s ease;opacity:0;pointer-events:none}
+.toast.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+.toast.success{border-left:5px solid #22c55e}
+.toast.error{border-left:5px solid #ef4444}
+.doc-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:150;padding:12px;align-items:flex-end;justify-content:center}
+.doc-modal.show{display:flex}
+.doc-card{background:#fff;width:100%;max-width:640px;max-height:92vh;border-radius:22px 22px 16px 16px;overflow:hidden;display:flex;flex-direction:column}
+.doc-head{padding:16px 18px;border-bottom:1px solid #e2e8f0;display:flex;gap:12px;align-items:center;background:#fff;position:sticky;top:0}
+.doc-head b{font-size:16px;display:block}
+.doc-head span{font-size:12px;color:#64748b}
+.doc-close{margin-left:auto;width:36px;height:36px;border:0;background:#f1f5f9;border-radius:50%;font-size:18px;cursor:pointer;flex-shrink:0}
+.doc-body{padding:18px;overflow-y:auto;line-height:1.7;font-size:13.5px;color:#334155}
+.doc-body h3{font-size:15px;color:#0f172a;margin:18px 0 6px}
+.doc-body h3:first-child{margin-top:0}
+.doc-body p{margin-bottom:10px}
+.doc-body ul{margin:0 0 10px 18px}
+.doc-body li{margin-bottom:6px}
+.doc-foot{padding:14px 18px;border-top:1px solid #e2e8f0;display:flex;gap:10px}
+.doc-foot button{flex:1;padding:12px;border-radius:12px;font-weight:800;cursor:pointer;border:0}
+.doc-foot .btn-agree{background:#5b21b6;color:#fff}
+.doc-foot .btn-close{background:#f1f5f9;color:#334155}
+.doc-badge{display:inline-block;background:#dcfce7;color:#166534;font-size:11px;font-weight:800;padding:4px 9px;border-radius:99px;margin-top:6px}
+.doc-info{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;font-size:12.5px;line-height:1.6;margin-bottom:14px}
+.pass-wrap{position:relative}
+.pass-wrap input{padding-right:44px}
+.btn-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);margin-top:3px;width:34px;height:34px;border:0;background:transparent;cursor:pointer;font-size:18px;border-radius:8px}
+.strength{margin-top:8px;display:none}
+.strength-bar{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.strength-fill{height:100%;width:0%;border-radius:99px;transition:width .3s, background .3s}
+.strength-text{font-size:11.5px;font-weight:700;margin-top:5px}
+.forgot-link{font-size:12.5px;color:#5b21b6;font-weight:700;cursor:pointer;text-align:right;display:block;margin-top:8px}
+.forgot-card{max-width:400px !important;text-align:left !important}
+.forgot-card label{margin-top:12px}
+/* === BARU: MODE GELAP / TERANG + ANIMASI + PROGRES === */
+.btn-theme{width:38px;height:38px;border:1.5px solid #e2e8f0;background:#f8fafc;border-radius:50%;cursor:pointer;font-size:18px;flex-shrink:0;display:grid;place-items:center}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.anim-masuk{animation:fadeSlideIn .35s ease both}
+@keyframes fadeSlideLeft{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeSlideRight{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
+.anim-left{animation:fadeSlideLeft .35s ease both}
+.anim-right{animation:fadeSlideRight .35s ease both}
+.progress-wrap{margin-bottom:18px}
+.progress-labels{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:7px}
+.progress-labels span.active{color:#5b21b6}
+.progress-labels span.done{color:#22c55e}
+.progress-track{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;width:33%;background:linear-gradient(90deg,#5b21b6,#f97316);border-radius:99px;transition:width .4s ease}
+.progress-text{font-size:11.5px;color:#64748b;margin-top:6px;text-align:center}
+body.dark{background:#0f172a}
+body.dark header{background:#1e293b;color:#e2e8f0}
+body.dark .header-ver{color:#e2e8f0}
+body.dark .right{background:#1e293b;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+body.dark h2{color:#fff}
+body.dark .sub{color:#94a3b8}
+body.dark label{color:#cbd5e1}
+body.dark input,body.dark select{background:#0f172a;border-color:#334155;color:#fff}
+body.dark input:focus,body.dark select:focus{background:#1e293b;border-color:#7c3aed}
+body.dark input::placeholder{color:#64748b}
+body.dark .tabs{background:#0f172a}
+body.dark .check{color:#94a3b8}
+body.dark .small{color:#64748b}
+body.dark .btn-theme{background:#0f172a;border-color:#334155}
+body.dark .modal-card{background:#1e293b;color:#fff}
+body.dark .modal-card p{color:#94a3b8}
+body.dark .doc-card{background:#1e293b;color:#e2e8f0}
+body.dark .doc-head{background:#1e293b;border-color:#334155}
+body.dark .doc-head b{color:#fff}
+body.dark .doc-body{color:#cbd5e1}
+body.dark .doc-body h3{color:#fff}
+body.dark .doc-foot{border-color:#334155}
+body.dark .doc-foot .btn-close{background:#0f172a;color:#e2e8f0}
+body.dark .doc-info{background:#0f172a;border-color:#334155}
+body.dark .dcard{background:#0f172a;border-color:#334155}
+body.dark .dcard b{color:#fff}
+body.dark .cs-body{background:#1e293b}
+body.dark .cs-opt{background:#1e293b;border-color:#334155;color:#fff}
+body.dark .cs-opt span{color:#94a3b8}
+body.dark .progress-track{background:#334155}
+body.dark .progress-text{color:#94a3b8}
+@media(max-width:820px){
+  .container{grid-template-columns:1fr;padding:0 12px;margin:14px auto;gap:14px}
+  .left{min-height:auto;padding:22px}
+  .left h1{font-size:32px}
+  header{padding:10px 12px}
+  nav{order:3;width:100%;padding-top:2px}
+  .right{padding:20px 16px}
+  .grid2{grid-template-columns:1fr 1fr}
+}
+@media(max-width:400px){
+  .grid2{grid-template-columns:1fr}
+  .left h1{font-size:28px}
+  .stat b{font-size:18px}
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"><span id="toastIcon">✅</span><span id="toastText"></span></div>
+<header>
+<div class="logo">🏆 E-<span>LOMBA</span></div>
+<nav><button class="btn-cs" onclick="openCS()"><span class="cs-icon-btn">🎧</span> Hubungi CS 🟢</button><a>Jadwal</a><a>Leaderboard</a><a>Bantuan</a></nav>
+<button class="btn-theme" id="btnTheme" onclick="toggleTheme()" title="Ganti Mode">🌙</button>
+<div class="header-ver">Versi 1.2.0</div>
+</header>
+<div class="container">
+  <div class="left">
+    <div>
+      <span class="badge">✨ UNTUK SISWA SD / SMP / SMA SE-INDONESIA</span>
+      <h1>Satu Aplikasi,<br><b>Semua Lomba</b><br>Sekolah.</h1>
+      <p>Daftar lomba 1 klik, jadwal & undian otomatis, live score, dan sertifikat digital. Tidak ada lagi info lomba yang ketinggalan.</p>
+      <div class="stats">
+        <div class="stat"><b>1.240+</b><span>Siswa Terdaftar</span></div>
+        <div class="stat"><b>48</b><span>Lomba Aktif</span></div>
+        <div class="stat"><b>12</b><span>Sekolah Gabung</span></div>
+      </div>
+    </div>
+    <p style="font-size:12px;opacity:.8;margin-top:20px">Mudah • Cepat • Transparan • Untuk Semua Pelajar Indonesia</p>
+  </div>
+  <div class="right" id="authBox">
+    <div class="tabs">
+      <button id="tabDaftar" class="active" onclick="switchTab('daftar')">Daftar Akun</button>
+      <button id="tabMasuk" onclick="switchTab('masuk')">Masuk Akun</button>
+    </div>
+    <div id="formDaftar" class="anim-masuk">
+      <div class="progress-wrap" id="progressDaftar">
+        <div class="progress-labels"><span id="step1Label" class="active">1. Data Diri</span><span id="step2Label">2. Verifikasi</span><span id="step3Label">3. Selesai</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-text" id="progressText">Langkah 1 dari 3 - Lengkapi Data Diri Anda</div>
+      </div>
+      <h2>Buat Akun Baru</h2>
+      <p class="sub">Jika tidak ada akun, wajib daftar dulu untuk ikut lomba.</p>
+      <label>Nama Lengkap</label>
+      <input id="nama" placeholder="Isi Nama Anda" oninput="updateProgress()">
+      <div class="grid2">
+        <div><label>Tanggal Lahir</label><input type="date" id="tgl" value="2007-06-15" oninput="updateProgress()"></div>
+        <div><label>Kelas</label><input id="kelas" placeholder="Isi Kelas Anda" oninput="updateProgress()"></div>
+      </div>
+      <label>Nama Sekolah</label>
+      <input id="sekolah" placeholder="Isi Nama Sekolah Anda" oninput="updateProgress()">
+      <div class="grid2">
+        <div>
+          <label>Password</label>
+          <div class="pass-wrap">
+            <input type="password" id="pass1" placeholder="Buat password" oninput="cekKekuatan();updateProgress()">
+            <button type="button" class="btn-eye" onclick="togglePass('pass1',this)">👁️</button>
+          </div>
+          <div class="strength" id="strengthBox">
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+            <div class="strength-text" id="strengthText">Kekuatan Password</div>
+          </div>
+        </div>
+        <div>
+          <label>Konfirmasi Password</label>
+          <div class="pass-wrap">
+            <input type="password" id="pass2" placeholder="Ulangi password" oninput="updateProgress()">
+            <button type="button" class="btn-eye" onclick="togglePass('pass2',this)">👁️</button>
+          </div>
+        </div>
+      </div>
+      <div class="error" id="errPass">Password dan konfirmasi tidak sama!</div>
+      <label>Gmail (Untuk Minta Code)</label>
+      <div class="row-code"><input id="gmail" type="email" placeholder="Isi Gmail Anda" oninput="updateProgress()"><button class="btn-code" id="btnMintaCode" onclick="mintaCode()">Minta Code</button></div>
+      <label>Isi Code dari Gmail Kamu</label>
+      <input id="kode" placeholder="Cek Gmail kamu, masukkan 6 digit code" inputmode="numeric" maxlength="6" oninput="updateProgress()">
+      <div class="success" id="infoCode"></div>
+      <div class="error" id="infoError"></div>
+      <label>Verifikasi Bukan Robot <span id="captchaTimer" style="font-weight:400;color:#f97316;font-size:11px">• Ganti otomatis 30s</span></label>
+      <div class="captcha"><b id="captchaText">7B9K2M</b><button onclick="refreshCaptcha()">🔄 Acak</button></div>
+      <input id="captchaInput" placeholder="Ketik kode di atas" style="margin-top:10px;text-transform:uppercase" oninput="this.value=this.value.toUpperCase();updateProgress()">
+      <div class="check"><input type="checkbox" id="setuju1" onchange="updateProgress()"><span>Saya setuju <a onclick="openDoc('ketentuan')">Ketentuan Aplikasi</a> & <a onclick="openDoc('privasi')">Kebijakan Privasi</a> E-LOMBA. Data saya digunakan hanya untuk keperluan lomba sekolah.</span></div>
+      <button class="btn-main" onclick="daftar()">DAFTAR & VERIFIKASI →</button>
+      <p class="small">Sudah punya akun? <a href="#" onclick="switchTab('masuk');return false" style="color:#5b21b6;font-weight:700">Masuk di sini</a></p>
+    </div>
+    <div id="formMasuk" style="display:none">
+      <h2>Selamat Datang Kembali 👋</h2>
+      <p class="sub">Masuk untuk lanjut ke Dashboard Utama.</p>
+      <label>Nama</label>
+      <input id="loginNama" placeholder="Isi Nama Anda">
+      <label>Password</label>
+      <div class="pass-wrap">
+        <input type="password" id="loginPass" placeholder="Masukkan password">
+        <button type="button" class="btn-eye" onclick="togglePass('loginPass',this)">👁️</button>
+      </div>
+      <span class="forgot-link" onclick="openLupa()">Lupa Password? Klik di sini →</span>
+      <div class="check"><input type="checkbox" id="setuju2" checked><span>Saya setuju <a onclick="openDoc('ketentuan')">Ketentuan Aplikasi</a> E-LOMBA</span></div>
+      <button class="btn-main" onclick="masuk()">MASUK KE DASHBOARD UTAMA →</button>
+      <p class="small">Belum punya akun? <a href="#" onclick="switchTab('daftar');return false" style="color:#5b21b6;font-weight:700">Daftar dulu</a></p>
+    </div>
+    <div class="dashboard" id="dashboard">
+      <div style="font-size:44px">🎉</div>
+      <h2 id="welcomeText">Halo!</h2>
+      <p>Kamu berhasil masuk. Ini Dashboard Utama E-LOMBA kamu.</p>
+      <div class="cards">
+        <div class="dcard"><b>⚽ Futsal Cup</b><span>Besok • 09:00 • Sudah Daftar</span></div>
+        <div class="dcard"><b>🎤 Lomba Pidato</b><span>Live Sekarang • Skor 85</span></div>
+        <div class="dcard"><b>🧠 Cerdas Cermat</b><span>Final • 14:00 • Rank #2</span></div>
+        <div class="dcard"><b>🏆 Sertifikat</b><span>2 Sertifikat Siap Diunduh</span></div>
+      </div>
+      <button class="btn-main" onclick="location.reload()">Keluar / Ganti Akun</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="popup">
+  <div class="modal-card">
+    <div class="icon">✅</div>
+    <h3>Berhasil!</h3>
+    <p>Akun berhasil dibuat! <br>Silakan masuk ke aplikasi dengan Nama & Password kamu.</p>
+    <button onclick="lanjutKeMasuk()">Lanjut ke Masuk →</button>
+  </div>
+</div>
+<div class="modal" id="popupLupa" onclick="if(event.target==this) closeLupa()">
+  <div class="modal-card forgot-card">
+    <div style="font-size:36px;text-align:center">🔑</div>
+    <h3 style="text-align:center">Lupa Password</h3>
+    <p style="text-align:center">Masukkan Gmail yang terdaftar, kami akan kirimkan Code untuk reset password.</p>
+    <div id="stepLupa1">
+      <label>Gmail Terdaftar</label>
+      <input id="lupaGmail" type="email" placeholder="Masukkan Gmail Anda">
+      <button class="btn-main" onclick="kirimCodeLupa()" id="btnLupaCode" style="background:#f97316">Kirim Code Reset</button>
+    </div>
+    <div id="stepLupa2" style="display:none">
+      <label>Code dari Gmail (6 Digit)</label>
+      <input id="lupaKode" placeholder="Masukkan 6 digit code" inputmode="numeric" maxlength="6">
+      <label>Password Baru</label>
+      <div class="pass-wrap">
+        <input type="password" id="lupaPass1" placeholder="Buat password baru">
+        <button type="button" class="btn-eye" onclick="togglePass('lupaPass1',this)">👁️</button>
+      </div>
+      <label>Konfirmasi Password Baru</label>
+      <div class="pass-wrap">
+        <input type="password" id="lupaPass2" placeholder="Ulangi password baru">
+        <button type="button" class="btn-eye" onclick="togglePass('lupaPass2',this)">👁️</button>
+      </div>
+      <button class="btn-main" onclick="resetPassword()">Simpan Password Baru</button>
+    </div>
+    <button class="btn-main" onclick="closeLupa()" style="background:#f1f5f9;color:#334155;margin-top:10px">Batal</button>
+  </div>
+</div>
+<div class="modal" id="popupCS" onclick="if(event.target==this) closeCS()">
+  <div class="cs-card">
+    <div class="cs-head">
+      <div class="cs-avatar">🎧</div>
+      <div><b>CS E-LOMBA 🟢 Online</b><span>Balas < 5 menit • Senin - Sabtu 08.00 - 20.00</span></div>
+      <span style="margin-left:auto;cursor:pointer;font-size:20px" onclick="closeCS()">✕</span>
+    </div>
+    <div class="cs-body">
+      <p style="font-size:13px;color:#64748b;margin-bottom:12px">Ada kendala daftar / login / lomba? Hubungi kami:</p>
+      <a class="cs-opt" href="https://wa.me/6285119034852?text=Halo%20CS%20E-LOMBA%2C%20saya%20butuh%20bantuan" target="_blank"><span style="font-size:24px">💬</span><div><b>Chat WhatsApp CS</b><span>0851-1903-4852 • Fast Respon</span></div><span style="margin-left:auto">›</span></a>
+      <div class="cs-opt" onclick="showToast('Membuka Email CS...','✅')"><span style="font-size:24px">📧</span><div><b>Email CS</b><span>websiteresmi066@gmail.com</span></div><span style="margin-left:auto">›</span></div>
+      <div class="cs-opt" onclick="showToast('Membuka Pusat Bantuan...','❓')"><span style="font-size:24px">❓</span><div><b>Pusat Bantuan / FAQ</b><span>Cara daftar, lupa password, dll</span></div><span style="margin-left:auto">›</span></div>
+      <button class="btn-main" onclick="closeCS()">Tutup</button>
+    </div>
+  </div>
+</div>
+<div class="doc-modal" id="docKetentuan" onclick="if(event.target==this) closeDoc()">
+  <div class="doc-card">
+    <div class="doc-head"><div style="font-size:26px">📜</div><div><b>Ketentuan Layanan E-LOMBA</b><span>Berlaku sejak: 19 November 2026 • Versi 1.2.0 • Dokumen Resmi</span></div><button class="doc-close" onclick="closeDoc()">✕</button></div>
+    <div class="doc-body">
+      <div class="doc-info"><b>PT E-LOMBA DIGITAL INDONESIA</b> • Terdaftar sebagai Penyelenggara Sistem Elektronik • Dokumen ini adalah perjanjian yang sah antara Pengguna dan E-LOMBA. Dengan menekan tombol “Saya Setuju”, Anda menyatakan telah membaca, memahami, dan menerima seluruh ketentuan di bawah ini secara sadar dan tanpa paksaan.<br><span class="doc-badge">✅ DOKUMEN RESMI • MENGIKAT SECARA HUKUM</span></div>
+      <p>Selamat datang di <b>E-LOMBA</b> — platform resmi manajemen lomba sekolah untuk pelajar SD / SMP / SMA / sederajat di seluruh Indonesia. Dokumen ini mengatur hak, kewajiban, dan tanggung jawab Pengguna dan Penyelenggara.</p>
+      <h3>1. Definisi & Ruang Lingkup Layanan</h3>
+      <p><b>1.1.</b> “E-LOMBA” adalah aplikasi dan layanan digital yang dikelola oleh PT E-LOMBA DIGITAL INDONESIA, meliputi pendaftaran akun, pendaftaran lomba, pengumuman jadwal, undian, live score, pengumuman juara, dan penerbitan sertifikat digital.</p>
+      <p><b>1.2.</b> “Pengguna” adalah pelajar, orang tua/wali, guru, panitia, dan juri yang menggunakan layanan E-LOMBA.</p>
+      <p><b>1.3.</b> Layanan ini hanya untuk keperluan pendidikan dan kompetisi sekolah yang sah, bukan untuk perjudian, penipuan, atau kegiatan yang melanggar hukum.</p>
+      <h3>2. Persyaratan Pendaftaran Akun</h3>
+      <ul><li><b>2.1.</b> Pengguna wajib berstatus pelajar aktif SD / SMP / SMA / sederajat dan mengisi data dengan benar, lengkap, dan dapat dipertanggungjawabkan: Nama Lengkap sesuai rapor, Tanggal Lahir, Nama Sekolah, Kelas, dan Gmail aktif.</li><li><b>2.2.</b> Satu Gmail hanya berlaku untuk satu akun. Dilarang membuat akun ganda, akun palsu, atau menggunakan identitas orang lain.</li><li><b>2.3.</b> Pengguna di bawah 17 tahun dianggap telah memperoleh persetujuan dari orang tua/wali atau pihak sekolah. Sekolah dapat melakukan verifikasi ulang kapan saja.</li><li><b>2.4.</b> E-LOMBA berhak menolak, menunda, atau menonaktifkan akun yang datanya tidak dapat diverifikasi.</li></ul>
+      <h3>3. Keamanan Akun & Kerahasiaan Data</h3>
+      <ul><li><b>3.1.</b> Pengguna bertanggung jawab penuh menjaga kerahasiaan password, PIN, dan kode verifikasi (OTP) 6 digit. Jangan bagikan kode OTP kepada siapapun, termasuk pihak yang mengaku sebagai CS E-LOMBA.</li><li><b>3.2.</b> Segala aktivitas yang terjadi melalui akun Anda dianggap sebagai aktivitas Anda, kecuali Anda dapat membuktikan adanya penyalahgunaan dan telah melaporkannya dalam waktu 1x24 jam.</li><li><b>3.3.</b> Jika akun dicurigai disalahgunakan, E-LOMBA berhak mengunci akun sementara untuk investigasi dan meminta verifikasi ulang melalui Gmail terdaftar.</li><li><b>3.4.</b> Pengguna wajib segera melapor ke CS WhatsApp <b>0851-1903-4852</b> jika menemukan aktivitas mencurigakan.</li></ul>
+      <h3>4. Pendaftaran & Keikutsertaan Lomba</h3>
+      <ul><li><b>4.1.</b> Pendaftaran lomba hanya sah jika dilakukan dalam periode pendaftaran yang tertera di aplikasi dan telah terverifikasi sistem.</li><li><b>4.2.</b> Data pendaftaran yang telah dikirim tidak dapat diubah setelah batas pendaftaran ditutup, kecuali atas persetujuan tertulis Panitia.</li><li><b>4.3.</b> Panitia berhak mendiskualifikasi peserta yang terbukti memberikan data palsu, memalsukan dokumen sekolah, atau melanggar ketentuan lomba.</li><li><b>4.4.</b> Jika lomba berbayar, rincian biaya, metode pembayaran, dan batas waktu pembayaran akan ditampilkan secara transparan sebelum konfirmasi. Pembayaran yang sudah dikonfirmasi mengikuti kebijakan pengembalian pada Pasal 7.</li></ul>
+      <h3>5. Tata Tertib & Kode Etik Peserta</h3>
+      <ul><li><b>5.1.</b> Peserta wajib menjunjung tinggi sportivitas, kejujuran, dan rasa hormat kepada peserta lain, panitia, juri, dan pihak sekolah.</li><li><b>5.2.</b> Dilarang keras melakukan kecurangan dalam bentuk apapun, termasuk joki, plagiarisme, manipulasi skor, pemalsuan identitas, dan penggunaan alat bantu yang dilarang.</li><li><b>5.3.</b> Dilarang mengunggah, menyebarkan, atau menampilkan konten yang mengandung SARA, ujaran kebencian, kekerasan, pornografi, perundungan, atau yang melanggar peraturan perundang-undangan yang berlaku di Indonesia.</li><li><b>5.4.</b> Pelanggaran terhadap pasal ini dapat dikenai sanksi berupa peringatan, diskualifikasi, pencabutan juara/sertifikat, dan pemblokiran akun permanen.</li></ul>
+      <h3>6. Penilaian, Juara & Sertifikat</h3>
+      <p><b>6.1.</b> Skor yang ditampilkan pada Live Score bersifat sementara dan dapat berubah setelah verifikasi juri. <b>6.2.</b> Keputusan Dewan Juri bersifat final, mutlak, dan tidak dapat diganggu gugat. <b>6.3.</b> Sertifikat digital hanya diterbitkan kepada peserta yang memenuhi syarat kehadiran, kelengkapan data, dan ketentuan lomba. Sertifikat yang diterbitkan memiliki nomor seri dan kode verifikasi yang dapat dicek keasliannya.</p>
+      <h3>7. Pembatalan, Pengembalian & Force Majeure</h3>
+      <p><b>7.1.</b> Jika lomba dibatalkan oleh Panitia/Penyelenggara, biaya pendaftaran (jika ada) akan dikembalikan 100% sesuai prosedur Panitia maksimal 7x24 jam kerja. <b>7.2.</b> Pembatalan oleh peserta setelah batas waktu yang ditentukan tidak dapat dikembalikan, kecuali atas alasan medis yang dibuktikan dengan surat keterangan resmi. <b>7.3.</b> E-LOMBA tidak bertanggung jawab atas keterlambatan atau pembatalan akibat keadaan kahar (force majeure), termasuk bencana alam, gangguan jaringan nasional, atau kebijakan pemerintah.</p>
+      <h3>8. Perubahan Ketentuan, Penyelesaian Sengketa & Hukum yang Berlaku</h3>
+      <p><b>8.1.</b> E-LOMBA dapat memperbarui Ketentuan ini sewaktu-waktu. Perubahan material akan diumumkan melalui aplikasi dan/atau Gmail minimal 7 hari sebelum berlaku. Dengan terus menggunakan layanan setelah perubahan berlaku, Anda dianggap menyetujui ketentuan terbaru. <b>8.2.</b> Segala sengketa akan diselesaikan secara musyawarah. Jika tidak tercapai, sengketa akan diselesaikan sesuai peraturan perundang-undangan yang berlaku di Republik Indonesia. <b>8.3.</b> Pertanyaan terkait ketentuan ini: WhatsApp CS <b>0851-1903-4852</b> (Senin - Sabtu, 08.00 - 20.00 WIB) atau Email <b>websiteresmi066@gmail.com</b>.</p>
+      <p style="color:#94a3b8;font-size:12px;margin-top:16px">© 2026 PT E-LOMBA DIGITAL INDONESIA • E-LOMBA Versi 1.2.0 • Dokumen ini dilindungi dan mengikat secara hukum</p>
+    </div>
+    <div class="doc-foot"><button class="btn-close" onclick="closeDoc()">Tutup</button><button class="btn-agree" onclick="setujuDoc()">Saya Setuju & Lanjut Daftar ✓</button></div>
+  </div>
+</div>
+<div class="doc-modal" id="docPrivasi" onclick="if(event.target==this) closeDoc()">
+  <div class="doc-card">
+    <div class="doc-head"><div style="font-size:26px">🔒</div><div><b>Kebijakan Privasi E-LOMBA</b><span>Berlaku sejak: 19 November 2026 • Versi 1.2.0 • Sesuai UU PDP No. 27 Tahun 2022</span></div><button class="doc-close" onclick="closeDoc()">✕</button></div>
+    <div class="doc-body">
+      <div class="doc-info"><b>Komitmen Kami:</b> Privasi Anda adalah prioritas. Kebijakan ini disusun sesuai dengan Undang-Undang No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP) dan peraturan pelaksanaannya. Kami menjelaskan secara transparan data apa yang kami kumpulkan, dasar hukumnya, untuk apa digunakan, dan bagaimana Anda dapat mengendalikan data Anda.<br><span class="doc-badge">🛡️ SESUAI UU PDP NO. 27 TAHUN 2022</span></div>
+      <p>Dengan menggunakan E-LOMBA, Anda menyetujui pengumpulan dan pemrosesan Data Pribadi sebagaimana dijelaskan dalam Kebijakan ini. Jika Anda tidak setuju, mohon untuk tidak melanjutkan pendaftaran.</p>
+      <h3>1. Data Pribadi yang Kami Kumpulkan</h3>
+      <ul><li><b>1.1. Data Identitas:</b> Nama Lengkap, Tanggal Lahir, Nama Sekolah, Kelas, dan Gmail aktif.</li><li><b>1.2. Data Kredensial:</b> Password yang disimpan dalam bentuk terenkripsi (hash) dan tidak dapat dibaca oleh tim kami dalam bentuk teks biasa.</li><li><b>1.3. Data Lomba:</b> Riwayat pendaftaran lomba, jadwal, skor, peringkat, kehadiran, dan sertifikat.</li><li><b>1.4. Data Teknis:</b> Jenis perangkat, versi aplikasi, alamat IP, dan log aktivitas untuk keamanan dan pencegahan penipuan.</li><li><b>1.5.</b> Kami <b>TIDAK PERNAH</b> meminta PIN ATM, password Gmail, OTP orang lain, atau kode verifikasi melalui telepon/WA yang mengatasnamakan E-LOMBA.</li></ul>
+      <h3>2. Dasar Hukum & Tujuan Pemrosesan</h3>
+      <p>Pemrosesan data dilakukan atas dasar persetujuan Anda, pelaksanaan kontrak layanan, dan kewajiban hukum. Tujuan pemrosesan:</p>
+      <ul><li><b>2.1.</b> Pembuatan, verifikasi, dan pengelolaan akun Anda.</li><li><b>2.2.</b> Pendaftaran lomba, verifikasi peserta, pengumuman jadwal, dan penerbitan sertifikat.</li><li><b>2.3.</b> Pencegahan kecurangan, penipuan, dan penyalahgunaan akun.</li><li><b>2.4.</b> Peningkatan kualitas layanan, analisis agregat, dan pengembangan fitur baru (tanpa mengidentifikasi individu).</li></ul>
+      <h3>3. Keamanan & Perlindungan Data</h3>
+      <ul><li><b>3.1.</b> Password disimpan dalam bentuk terenkripsi (hashing) dan tidak dapat dikembalikan ke bentuk awal.</li><li><b>3.2.</b> Kode verifikasi (OTP) hanya berlaku 5 menit, hanya dapat digunakan sekali, dan akan kedaluwarsa secara otomatis.</li><li><b>3.3.</b> Akses ke Data Pribadi dibatasi hanya untuk personel E-LOMBA yang berwenang dan terikat perjanjian kerahasiaan.</li><li><b>3.4.</b> Kami menerapkan enkripsi transmisi (HTTPS/TLS), kontrol akses berlapis, dan pemantauan keamanan berkala.</li><li><b>3.5.</b> Dalam hal terjadi insiden kebocoran data, kami akan memberitahukan kepada Pengguna dan otoritas yang berwenang sesuai dengan ketentuan UU PDP.</li></ul>
+      <h3>4. Pembagian Data kepada Pihak Ketiga</h3>
+      <p><b>4.1.</b> Data Anda hanya dibagikan kepada Panitia Lomba dan Sekolah terkait untuk keperluan verifikasi peserta, penjadwalan, dan penerbitan sertifikat. <b>4.2.</b> Kami tidak menjual, menyewakan, atau memperjualbelikan Data Pribadi Anda kepada pihak manapun. <b>4.3.</b> Pembagian data di luar tujuan di atas hanya dilakukan atas persetujuan Anda atau jika diwajibkan oleh peraturan perundang-undangan, perintah pengadilan, atau otoritas yang berwenang.</p>
+      <h3>5. Hak-Hak Subjek Data Pribadi</h3>
+      <p>Sesuai UU PDP, Anda memiliki hak untuk:</p>
+      <ul><li><b>5.1.</b> Memperoleh informasi tentang pemrosesan data Anda.</li><li><b>5.2.</b> Mengakses, memperbarui, dan mengoreksi Data Pribadi Anda melalui menu Profil.</li><li><b>5.3.</b> Menarik persetujuan dan meminta penghapusan data, dengan memperhatikan kewajiban arsip lomba yang sudah diterbitkan.</li><li><b>5.4.</b> Mengajukan keberatan atas pemrosesan data tertentu dan meminta salinan data Anda.</li><li><b>5.5.</b> Untuk menggunakan hak-hak tersebut, hubungi CS kami dan kami akan merespons maksimal 2x24 jam kerja.</li></ul>
+      <h3>6. Penyimpanan & Retensi Data</h3>
+      <p><b>6.1.</b> Data Pribadi disimpan selama akun Anda aktif dan selama diperlukan untuk memenuhi tujuan di atas serta kewajiban hukum. <b>6.2.</b> Jika akun tidak aktif selama 2 tahun, data dapat dihapus atau dianonimkan sesuai prosedur kami. <b>6.3.</b> Data yang telah dihapus secara permanen tidak dapat dipulihkan. Dokumen yang telah diterbitkan (misal sertifikat) dapat tetap disimpan sebagai arsip resmi sekolah.</p>
+      <h3>7. Perlindungan Data Anak & Remaja</h3>
+      <p><b>7.1.</b> E-LOMBA dirancang khusus untuk pelajar SD / SMP / SMA. Kami tidak menargetkan anak di bawah 7 tahun. <b>7.2.</b> Pendaftaran pelajar di bawah 17 tahun dianggap telah memperoleh persetujuan orang tua/wali. <b>7.3.</b> Jika Anda adalah orang tua/wali dan menemukan Data Pribadi anak Anda diproses tanpa izin, segera hubungi CS kami untuk peninjauan dan penghapusan.</p>
+      <h3>8. Perubahan Kebijakan & Kontak Kami</h3>
+      <p><b>8.1.</b> Kebijakan ini dapat diperbarui sewaktu-waktu. Perubahan material akan diumumkan melalui aplikasi dan/atau Gmail minimal 7 hari sebelum berlaku. <b>8.2.</b> Dengan terus menggunakan E-LOMBA setelah perubahan berlaku, Anda dianggap menyetujui Kebijakan terbaru. <b>8.3.</b> Untuk pertanyaan, permintaan akses, koreksi, atau penghapusan data: WhatsApp <b>0851-1903-4852</b> (Senin - Sabtu, 08.00 - 20.00 WIB) atau Email <b>websiteresmi066@gmail.com</b>.</p>
+      <p style="color:#94a3b8;font-size:12px;margin-top:16px">© 2026 PT E-LOMBA DIGITAL INDONESIA • Kebijakan Privasi Versi 1.2.0 • Sesuai UU PDP No. 27 Tahun 2022</p>
+    </div>
+    <div class="doc-foot"><button class="btn-close" onclick="closeDoc()">Tutup</button><button class="btn-agree" onclick="setujuDoc()">Saya Mengerti & Setuju ✓</button></div>
+  </div>
+</div>
+<script>
+const APP_VERSION_DEFAULT = "1.2.0";
+let APP_VERSION = localStorage.getItem('elomba_app_version') || APP_VERSION_DEFAULT;
+function syncVersi(){
+  let hv = document.querySelector('.header-ver');
+  if(hv) hv.innerText = "Versi " + APP_VERSION;
+  localStorage.setItem('elomba_app_version', APP_VERSION);
+}
+syncVersi();
+// === BARU: MODE GELAP / TERANG ===
+function applyTheme(){
+  let t = localStorage.getItem('elomba_theme') || 'light';
+  if(t==='dark'){ document.body.classList.add('dark'); document.getElementById('btnTheme').innerText='☀️'; }
+  else { document.body.classList.remove('dark'); document.getElementById('btnTheme').innerText='🌙'; }
+}
+function toggleTheme(){
+  let cur = localStorage.getItem('elomba_theme') || 'light';
+  localStorage.setItem('elomba_theme', cur==='dark' ? 'light' : 'dark');
+  applyTheme();
+}
+applyTheme();
+// === BARU: PROGRES DAFTAR ===
+function updateProgress(){
+  let fill = document.getElementById('progressFill');
+  let txt = document.getElementById('progressText');
+  let l1 = document.getElementById('step1Label');
+  let l2 = document.getElementById('step2Label');
+  let l3 = document.getElementById('step3Label');
+  if(!fill) return;
+  let nama = document.getElementById('nama').value.trim();
+  let kelas = document.getElementById('kelas').value.trim();
+  let sekolah = document.getElementById('sekolah').value.trim();
+  let p1 = document.getElementById('pass1').value;
+  let kode = document.getElementById('kode').value.trim();
+  let cap = document.getElementById('captchaInput').value.trim();
+  let setuju = document.getElementById('setuju1').checked;
+  l1.className=''; l2.className=''; l3.className='';
+  if(kodeGmail && kode && cap && setuju){
+    fill.style.width='100%'; l1.className='done'; l2.className='done'; l3.className='active';
+    txt.innerText='Langkah 3 dari 3 - Semua lengkap, silakan klik Daftar!';
+  } else if(kodeGmail || kode){
+    fill.style.width='66%'; l1.className='done'; l2.className='active';
+    txt.innerText='Langkah 2 dari 3 - Verifikasi Gmail & Captcha';
+  } else if(nama && kelas && sekolah && p1){
+    fill.style.width='50%'; l1.className='done'; l2.className='active';
+    txt.innerText='Langkah 2 dari 3 - Minta Code Gmail Anda';
+  } else {
+    fill.style.width='33%'; l1.className='active';
+    txt.innerText='Langkah 1 dari 3 - Lengkapi Data Diri Anda';
+  }
+}
+let kodeCaptcha="7B9K2M";
+let kodeGmail = "";
+let kodeLupa = "";
+let countdown = null;
+let captchaSisa = 30;
+let toastTimer = null;
+function showToast(msg, icon="✅", type="success"){
+  let t = document.getElementById('toast');
+  t.classList.remove('show');
+  clearTimeout(toastTimer);
+  setTimeout(()=>{
+    document.getElementById('toastText').innerText = msg;
+    document.getElementById('toastIcon').innerText = icon;
+    t.className = "toast show " + type;
+    toastTimer = setTimeout(()=>{ t.classList.remove('show'); }, 2500);
+  }, 150);
+}
+function hideToast(){ document.getElementById('toast').classList.remove('show'); clearTimeout(toastTimer); }
+function showInlineError(msg){
+  let el = document.getElementById('infoError');
+  el.innerText = msg; el.style.display = 'block';
+  document.getElementById('infoCode').style.display = 'none';
+}
+function showInlineSuccess(msg){
+  let el = document.getElementById('infoCode');
+  el.innerHTML = msg; el.style.display = 'block';
+  document.getElementById('infoError').style.display = 'none';
+}
+function openCS(){document.getElementById('popupCS').classList.add('show')}
+function closeCS(){document.getElementById('popupCS').classList.remove('show')}
+function openDoc(jenis){
+  closeDoc();
+  if(jenis==='ketentuan') document.getElementById('docKetentuan').classList.add('show');
+  if(jenis==='privasi') document.getElementById('docPrivasi').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeDoc(){
+  document.getElementById('docKetentuan').classList.remove('show');
+  document.getElementById('docPrivasi').classList.remove('show');
+  document.body.style.overflow='';
+}
+function setujuDoc(){
+  document.getElementById('setuju1').checked = true;
+  closeDoc();
+  updateProgress();
+  showToast('Terima kasih! Anda sudah menyetujui ketentuan','✅','success');
+}
+function switchTab(t){
+  hideToast();
+  let fD = document.getElementById('formDaftar');
+  let fM = document.getElementById('formMasuk');
+  fD.style.display = t==='daftar' ? 'block':'none';
+  fM.style.display = t==='masuk' ? 'block':'none';
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('tabDaftar').className = t==='daftar' ? 'active':'';
+  document.getElementById('tabMasuk').className = t==='masuk' ? 'active':'';
+  // Animasi masuk
+  if(t==='daftar'){ fD.classList.remove('anim-left','anim-right'); void fD.offsetWidth; fD.classList.add('anim-left'); }
+  else { fM.classList.remove('anim-left','anim-right'); void fM.offsetWidth; fM.classList.add('anim-right'); }
+}
+function togglePass(id, btn){
+  let inp = document.getElementById(id);
+  if(inp.type === 'password'){ inp.type = 'text'; btn.innerText = '🙈'; }
+  else { inp.type = 'password'; btn.innerText = '👁️'; }
+}
+function cekKekuatan(){
+  let v = document.getElementById('pass1').value;
+  let box = document.getElementById('strengthBox');
+  let fill = document.getElementById('strengthFill');
+  let txt = document.getElementById('strengthText');
+  if(!v){ box.style.display='none'; return; }
+  box.style.display='block';
+  let skor = 0;
+  if(v.length >= 8) skor++;
+  if(v.length >= 12) skor++;
+  if(/[a-z]/.test(v) && /[A-Z]/.test(v)) skor++;
+  if(/[0-9]/.test(v)) skor++;
+  if(/[^A-Za-z0-9]/.test(v)) skor++;
+  if(skor <= 2){ fill.style.width='33%'; fill.style.background='#ef4444'; txt.innerText='Lemah - Gunakan minimal 8 karakter, huruf besar, angka & simbol'; txt.style.color='#ef4444'; }
+  else if(skor <= 3){ fill.style.width='66%'; fill.style.background='#f97316'; txt.innerText='Sedang - Tambahkan huruf besar, angka & simbol agar lebih kuat'; txt.style.color='#f97316'; }
+  else { fill.style.width='100%'; fill.style.background='#22c55e'; txt.innerText='Kuat - Password Anda sudah aman!'; txt.style.color='#22c55e'; }
+}
+function openLupa(){
+  document.getElementById('popupLupa').classList.add('show');
+  document.getElementById('stepLupa1').style.display='block';
+  document.getElementById('stepLupa2').style.display='none';
+}
+function closeLupa(){
+  document.getElementById('popupLupa').classList.remove('show');
+  kodeLupa = "";
+}
+function kirimCodeLupa(){
+  let gmail = document.getElementById('lupaGmail').value.trim();
+  if(!gmail || !gmail.includes('@')){ showToast('Mohon isi Gmail yang benar terlebih dahulu!','⚠️','error'); return; }
+  let saved = {};
+  try{ saved = JSON.parse(localStorage.getItem('elomba_user') || '{}'); }catch(e){ saved={}; }
+  if(!saved.gmail || saved.gmail.toLowerCase() !== gmail.toLowerCase()){
+    showToast('Gmail tidak ditemukan! Silakan cek kembali Gmail Anda.','❌','error'); return;
+  }
+  kodeLupa = String(Math.floor(100000 + Math.random()*900000));
+  let btn = document.getElementById('btnLupaCode');
+  btn.disabled = true; btn.innerText = "Mengirim...";
+  emailjs.send("service_q7mqvot", "template_aczcuzo", {
+    email: gmail, to_email: gmail, otp: kodeLupa, code: kodeLupa, passcode: kodeLupa, name: saved.nama || "Peserta E-LOMBA"
+  }).then(function(){
+    btn.disabled = false; btn.innerText = "Kirim Code Reset";
+    document.getElementById('stepLupa1').style.display='none';
+    document.getElementById('stepLupa2').style.display='block';
+    showToast('Code reset terkirim ke ' + gmail,'📧','success');
+  }, function(error){
+    btn.disabled = false; btn.innerText = "Kirim Code Reset";
+    showToast('Gagal mengirim code, silakan coba lagi','❌','error');
+  });
+}
+function resetPassword(){
+  let kode = document.getElementById('lupaKode').value.trim();
+  let p1 = document.getElementById('lupaPass1').value;
+  let p2 = document.getElementById('lupaPass2').value;
+  if(kode !== kodeLupa){ showToast('Code salah! Silakan cek kembali Gmail Anda.','❌','error'); return; }
+  if(!p1 || p1.length < 6){ showToast('Password baru minimal 6 karakter!','⚠️','error'); return; }
+  if(p1 !== p2){ showToast('Password baru dan konfirmasi tidak sama!','⚠️','error'); return; }
+  let saved = {};
+  try{ saved = JSON.parse(localStorage.getItem('elomba_user') || '{}'); }catch(e){ saved={}; }
+  saved.pass = p1;
+  localStorage.setItem('elomba_user', JSON.stringify(saved));
+  closeLupa();
+  showToast('Password berhasil diubah! Silakan masuk dengan password baru.','✅','success');
+  switchTab('masuk');
+}
+function mintaCode(){
+  let gmail = document.getElementById('gmail').value.trim();
+  if(!gmail || !gmail.includes('@') || !gmail.includes('.')){
+    showToast('Mohon isi Gmail yang benar terlebih dahulu!','⚠️','error');
+    showInlineError('⚠️ Mohon isi Gmail yang benar terlebih dahulu, contoh: nama@gmail.com');
+    return;
+  }
+  kodeGmail = String(Math.floor(100000 + Math.random()*900000));
+  let btn = document.getElementById('btnMintaCode');
+  btn.disabled = true;
+  btn.innerText = "Mengirim...";
+  emailjs.send("service_q7mqvot", "template_aczcuzo", {
+    email: gmail,
+    to_email: gmail,
+    otp: kodeGmail,
+    code: kodeGmail,
+    passcode: kodeGmail,
+    name: document.getElementById('nama').value || "Peserta E-LOMBA"
+  }).then(function(){
+    let sisa = 60;
+    btn.innerText = "Kirim ulang " + sisa + "s";
+    clearInterval(countdown);
+    countdown = setInterval(()=>{
+      sisa--; btn.innerText = "Kirim ulang " + sisa + "s";
+      if(sisa<=0){ clearInterval(countdown); btn.disabled=false; btn.innerText="Minta Code"; }
+    },1000);
+    showInlineSuccess('✅ <b>Code terkirim ke ' + gmail + '</b><br>Silakan cek Inbox & folder Spam Gmail Anda. Code berlaku 5 menit.');
+    showToast('Code terkirim ke ' + gmail + ' • Silakan cek Gmail Anda','📧','success');
+    document.getElementById('kode').focus();
+    updateProgress();
+  }, function(error){
+    btn.disabled = false;
+    btn.innerText = "Minta Code";
+    showInlineError('❌ Gagal mengirim: ' + (error.text || JSON.stringify(error)));
+    showToast('Gagal mengirim code, silakan coba lagi','❌','error');
+  });
+}
+function buatCaptchaBaru(){
+  const c="ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let s="";
+  for(let i=0;i<6;i++) s+=c[Math.floor(Math.random()*c.length)];
+  kodeCaptcha=s;
+  document.getElementById('captchaText').innerText=s;
+  document.getElementById('captchaInput').value="";
+  document.getElementById('captchaInput').placeholder="Ketik kode baru: " + s;
+  captchaSisa = 30;
+}
+function refreshCaptcha(){
+  buatCaptchaBaru();
+  showToast('Captcha baru dibuat!','🔄','success');
+}
+setInterval(()=>{
+  captchaSisa--;
+  let label = document.getElementById('captchaTimer');
+  if(label) label.innerText = "• Ganti otomatis " + captchaSisa + "s";
+  if(captchaSisa<=0){ buatCaptchaBaru(); }
+},1000);
+buatCaptchaBaru();
+function daftar(){
+  let n=document.getElementById('nama').value.trim();
+  let p1=document.getElementById('pass1').value;
+  let p2=document.getElementById('pass2').value;
+  let kode=document.getElementById('kode').value.trim();
+  let cap=document.getElementById('captchaInput').value.trim().toUpperCase();
+  if(!n){ showToast('Mohon isi Nama Anda terlebih dahulu!','⚠️','error'); return }
+  if(!document.getElementById('kelas').value.trim()){ showToast('Mohon isi Kelas Anda terlebih dahulu!','⚠️','error'); return }
+  if(p1!==p2){document.getElementById('errPass').style.display='block'; return}
+  document.getElementById('errPass').style.display='none';
+  if(!kodeGmail){ showToast('Silakan klik Minta Code terlebih dahulu!','⚠️','error'); showInlineError('Silakan klik tombol Minta Code terlebih dahulu, lalu cek Gmail Anda.'); return }
+  if(kode !== kodeGmail){ showToast('Code Gmail salah! Silakan cek kembali Gmail Anda','❌','error'); showInlineError('❌ Code salah! Silakan cek kembali Gmail Anda di Inbox / Spam. Pastikan 6 digit sama persis.'); return }
+  if(cap!==kodeCaptcha){ showToast('Captcha salah! Captcha baru dibuat, silakan coba lagi','⚠️','error'); buatCaptchaBaru(); return }
+  if(!document.getElementById('setuju1').checked){ showToast('Mohon centang Setuju Ketentuan terlebih dahulu!','⚠️','error'); return }
+  let userData = {
+    nama: n,
+    kelas: document.getElementById('kelas').value.trim(),
+    sekolah: document.getElementById('sekolah').value.trim(),
+    tgl: document.getElementById('tgl').value,
+    gmail: document.getElementById('gmail').value.trim(),
+    pass: p1,
+    versi: APP_VERSION
+  };
+  localStorage.setItem('elomba_user', JSON.stringify(userData));
+  localStorage.setItem('elomba_nama', n);
+  localStorage.setItem('nama', n);
+  localStorage.setItem('kelas', userData.kelas);
+  localStorage.setItem('sekolah', userData.sekolah);
+  localStorage.setItem('gmail', userData.gmail);
+  localStorage.setItem('tgl', userData.tgl);
+  localStorage.setItem('elomba_app_version', APP_VERSION);
+  hideToast();
+  document.getElementById('popup').classList.add('show');
+}
+function lanjutKeMasuk(){
+  document.getElementById('popup').classList.remove('show');
+  document.getElementById('loginNama').value=document.getElementById('nama').value;
+  switchTab('masuk');
+}
+function masuk(){
+  let n=document.getElementById('loginNama').value.trim();
+  let p=document.getElementById('loginPass').value;
+  if(!n||!p){ showToast('Mohon isi Nama & Password terlebih dahulu!','⚠️','error'); return }
+  if(!document.getElementById('setuju2').checked){ showToast('Mohon centang Setuju Ketentuan terlebih dahulu!','⚠️','error'); return }
+  let saved = {};
+  try{ saved = JSON.parse(localStorage.getItem('elomba_user') || '{}'); }catch(e){ saved = {}; }
+  if(!saved.nama){
+    showToast('Akun belum terdaftar! Silakan daftar terlebih dahulu.','❌','error');
+    return;
+  }
+  if(n.toLowerCase() !== saved.nama.toLowerCase()){
+    showToast('Nama tidak ditemukan! Mohon periksa kembali nama Anda.','❌','error');
+    return;
+  }
+  if(p !== saved.pass){
+    showToast('Password salah! Mohon coba lagi.','❌','error');
+    return;
+  }
+  localStorage.setItem('elomba_nama', saved.nama);
+  localStorage.setItem('nama', saved.nama);
+  localStorage.setItem('elomba_login', 'true');
+  localStorage.setItem('elomba_app_version', APP_VERSION);
+  showToast('Berhasil Masuk! Selamat datang ' + saved.nama,'🎉','success');
+  setTimeout(function(){
+    window.location.href = "dashboard.html";
+  }, 800);
+}
+updateProgress();
+</script>
+</body>
+</html>
